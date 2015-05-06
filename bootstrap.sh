@@ -22,12 +22,15 @@ syntastic https://github.com/scrooloose/syntastic.git
 gnupg https://github.com/jamessan/vim-gnupg.git
 rsnapshot https://git.gitorious.org/spiette/vim-rsnapshot.git
 tabular https://github.com/godlygeek/tabular.git
-puppet https://github.com/rodjek/vim-puppet
 EOF
+# puppet https://github.com/rodjek/vim-puppet
+
 do
     echo path: url
-    git submodule add $url bundle/$path
-    git commit -m $path
+    if [[ ! -d bundle/$path ]]; then
+      git submodule add $url bundle/$path
+      git commit -m $path
+    fi
 done
 
 if [ ! -f ~/.vim/vimrc ] ; then
